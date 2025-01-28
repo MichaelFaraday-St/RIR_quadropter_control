@@ -71,6 +71,7 @@ xlabel('X [m]');
 ylabel('Y [m]');
 zlabel('Z [m]');
 hold(h, 'on');
+set(h, 'ZDir', 'reverse');
 
 % Draw waypoints
 plot3(wayPoints(:,1), wayPoints(:,2), wayPoints(:,3), 'r*');
