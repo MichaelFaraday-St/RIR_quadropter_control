@@ -70,6 +70,7 @@ trajectory = animatedline('Color', 'b', 'LineWidth', 1.5);
 for t = 0:deltaT:simulationTime
     % Get desired state from waypoint tracking
     if currentWaypoint <= size(wayPoints,1)
+        %                                     x ,dx,theta,dtheta
         target_x = [wayPoints(currentWaypoint,1); 0; 0; 0];
         target_y = [wayPoints(currentWaypoint,2); 0; 0; 0];
         target_z = [wayPoints(currentWaypoint,3); 0];
@@ -90,7 +91,7 @@ for t = 0:deltaT:simulationTime
     u_z = -K_z * ([x_z(1); x_hat_z] - target_z); % T (M3 = 0)
     
     %% Observer Update for MOO
-    % 
+    % dx_odhad = Ared * x_odhad + Bred * u(1) + Ke_x * (y(1) - Cred * x(1))
     x_hat_x_dot = Ax(2:end,2:end) * x_hat_x + Bx(2:end,:) * u_x + Ke_x * (y_x - Cx(:,1) * x_x(1));
     x_hat_x = x_hat_x + x_hat_x_dot * deltaT;
 
